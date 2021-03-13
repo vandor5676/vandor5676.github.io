@@ -13,8 +13,8 @@ function main() {
   // data for primitives by calling gl.createBuffer, gl.bindBuffer,
   // and gl.bufferData
   const sphereBufferInfo = primitives.createSphereWithVertexColorsBufferInfo(gl, 10, 12, 6);
-  const cubeBufferInfo   = primitives.createCubeWithVertexColorsBufferInfo(gl, 20);
-  const coneBufferInfo   = primitives.createTruncatedConeWithVertexColorsBufferInfo(gl, 10, 0, 20, 12, 1, true, false);
+  const cubeBufferInfo   = primitives.createCubeWithVertexColorsBufferInfo(gl, 25);
+  const coneBufferInfo   = primitives.createTruncatedConeWithVertexColorsBufferInfo(gl, 5, 0, 20, 12, 1, true, false);
 
   // setup GLSL program
   var programInfo = webglUtils.createProgramInfo(gl, ["vertex-shader-3d", "fragment-shader-3d"]);
@@ -40,9 +40,9 @@ function main() {
     u_colorMult: [0.5, 0.5, 1, 1],
     u_matrix: m4.identity(),
   };
-  var sphereTranslation = [  0, 0, 0];
-  var cubeTranslation   = [-40, 0, 0];
-  var coneTranslation   = [ 40, 0, 0];
+  var sphereTranslation = [  0, 30, 0];
+  var cubeTranslation   = [0, 0, 0];
+  var coneTranslation   = [ 0, 20, 0];
 
   function computeMatrix(viewProjectionMatrix, translation, xRotation, yRotation) {
     var matrix = m4.translate(viewProjectionMatrix,
@@ -77,7 +77,7 @@ function main() {
 
   // Draw the scene.
   function drawScene(time) {
-    time *= 0.0005;
+    time *= 0.0001;
 
     webglUtils.resizeCanvasToDisplaySize(gl.canvas);
 
@@ -96,12 +96,12 @@ function main() {
         m4.perspective(fieldOfViewRadians, aspect, 1, 2000);
 
     // Compute the camera's matrix using look at.
-    var cameraPosition = [0, 0, 100];
+    var cameraPosition = [0, 50, 60];
     var target = [0, 0, 0];
-    var up = [0, -1, 0];
+    var up = [0,1, 0];
     var cameraMatrix = m4.lookAt(cameraPosition, target, up);
-    var cameraMatrix = m4.yRotation(cameraAngleRadians);
-    cameraMatrix = m4.translate(cameraMatrix, 0, 0, 100 * 1.5);
+    cameraMatrix = m4.multiply(m4.yRotation(cameraAngleRadians),cameraMatrix,);
+    cameraMatrix = m4.translate(cameraMatrix, 0, 0, 1 * 1);
 
     // Make a view matrix from the camera matrix.
     var viewMatrix = m4.inverse(cameraMatrix);
@@ -113,7 +113,7 @@ function main() {
     var cubeXRotation   = -time;
     var cubeYRotation   =  time;
     var coneXRotation   =  time;
-    var coneYRotation   = -time;
+    var coneYRotation   = time;
 
     // ------ Draw the sphere --------
 

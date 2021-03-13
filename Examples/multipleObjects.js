@@ -49,11 +49,31 @@ function main() {
         translation[0],
         translation[1],
         translation[2]);
-    matrix = m4.xRotate(matrix, xRotation);
+    //matrix = m4.xRotate(matrix, xRotation);
     return m4.yRotate(matrix, yRotation);
   }
 
   requestAnimationFrame(drawScene);
+
+  //
+  //
+  function radToDeg(r) {
+    return r * 180 / Math.PI;
+  }
+
+  function degToRad(d) {
+    return d * Math.PI / 180;
+  }
+
+  var cameraAngleRadians = degToRad(0);
+  var fieldOfViewRadians = degToRad(60);
+
+  // Setup a ui.
+  webglLessonsUI.setupSlider("#cameraAngle", {value: radToDeg(cameraAngleRadians), slide: updateCameraAngle, min: -360, max: 360});
+  function updateCameraAngle(event, ui) {
+    cameraAngleRadians = degToRad(ui.value);
+    drawScene();
+  }
 
   // Draw the scene.
   function drawScene(time) {
@@ -78,8 +98,10 @@ function main() {
     // Compute the camera's matrix using look at.
     var cameraPosition = [0, 0, 100];
     var target = [0, 0, 0];
-    var up = [0, 1, 0];
+    var up = [0, -1, 0];
     var cameraMatrix = m4.lookAt(cameraPosition, target, up);
+    var cameraMatrix = m4.yRotation(cameraAngleRadians);
+    cameraMatrix = m4.translate(cameraMatrix, 0, 0, 100 * 1.5);
 
     // Make a view matrix from the camera matrix.
     var viewMatrix = m4.inverse(cameraMatrix);

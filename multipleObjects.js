@@ -17,18 +17,10 @@ function main() {
 
   // Uniforms for each object.
   
-  var cubeUniforms = {
-    u_colorMult: [1, 0.5, 0.5, 1],
-    u_matrix: m4.identity(),
-  };
-  var coneUniforms = {
-    //u_colorMult: [0.5, 0.5, 1, 1],
-    u_colorMult: hexToRgbVec4("BE624D"),
-    u_matrix: m4.identity(),
-  };
+ 
+
   
-  var cubeTranslation   = [0, 0, 0];
-  var coneTranslation   = [ 0, 20, 0];
+
 
   
 
@@ -58,7 +50,7 @@ function main() {
   function drawScene(time) {
     time *= 0.0001;
     globals.time = time;
-    
+
     webglUtils.resizeCanvasToDisplaySize(gl.canvas);
 
     // Tell WebGL how to convert from clip space to pixels
@@ -89,42 +81,13 @@ function main() {
     viewProjectionMatrix = m4.multiply(projectionMatrix, viewMatrix);
 
 
-    var cubeYRotation   =  time;
-    var coneYRotation   = time;
+
 
 
     gl.useProgram(programInfo.program);
     drawTree();
 
-    // ------ Draw the cube --------
-
-    // Setup all the needed attributes.
-    webglUtils.setBuffersAndAttributes(gl, programInfo, cubeBufferInfo);
-
-    cubeUniforms.u_matrix = computeMatrix(
-        viewProjectionMatrix,
-        cubeTranslation,
-        cubeYRotation);
-
-    // Set the uniforms we just computed
-    webglUtils.setUniforms(programInfo, cubeUniforms);
-
-    gl.drawArrays(gl.TRIANGLES, 0, cubeBufferInfo.numElements);
-
-    // ------ Draw the cone --------
-
-    // Setup all the needed attributes.
-    webglUtils.setBuffersAndAttributes(gl, programInfo, coneBufferInfo);
-
-    coneUniforms.u_matrix = computeMatrix(
-        viewProjectionMatrix,
-        coneTranslation,
-        coneYRotation);
-
-    // Set the uniforms we just computed
-    webglUtils.setUniforms(programInfo, coneUniforms);
-
-    gl.drawArrays(gl.TRIANGLES, 0, coneBufferInfo.numElements);
+    
 
     requestAnimationFrame(drawScene);
   }

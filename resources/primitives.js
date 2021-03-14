@@ -1106,7 +1106,8 @@
       vertices = makeRandomVertexColors(vertices, {
           vertsPerColor: 6,
           rand: function(ndx, channel) {
-            return channel < 3 ? ((128 + Math.random() * 128) | 0) : 255;
+            //return channel < 3 ? ((128 + Math.random() * 128) | 0) : 255;
+            return channel < 3 ? ((191 + Math.random() * 63) | 0) : 255;
           },
         });
       return webglUtils.createBufferInfoFromArrays(gl, vertices);

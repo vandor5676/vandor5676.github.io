@@ -37,7 +37,8 @@ function main() {
     u_matrix: m4.identity(),
   };
   var coneUniforms = {
-    u_colorMult: [0.5, 0.5, 1, 1],
+    //u_colorMult: [0.5, 0.5, 1, 1],
+    u_colorMult: hexToRgbVec4("BE624D"),
     u_matrix: m4.identity(),
   };
   var sphereTranslation = [  0, 30, 0];

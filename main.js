@@ -12,7 +12,7 @@ function main() {
   // Setup a ui.
   webglLessonsUI.setupSlider("#cameraAngle", {value: radToDeg(cameraAngleRadians), slide: updateCameraAngle, min: 0, max: 360});
   function updateCameraAngle(event, ui) {
-    cameraAngleRadians = degToRad(ui.value);
+    cameraAngleRadians = degToRad(ui.value );
     drawScene();
   }
 

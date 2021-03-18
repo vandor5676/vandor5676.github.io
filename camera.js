@@ -6,17 +6,11 @@ function radToDeg(r) {
     return d * Math.PI / 180;
   }
 
-  function degToRad(d) {
-    return d * Math.PI / 180;
-  }
-
   var cameraAngleRadians = degToRad(0);
   var fieldOfViewRadians = degToRad(60);
   var cameraHeight = 50;
 
-  var cameraAngleRadians = degToRad(0);
-  var fieldOfViewRadians = degToRad(60);
-
+  //used to animate camera
   function camera()
   {
       // Compute the projection matrix
@@ -28,8 +22,10 @@ function radToDeg(r) {
     var cameraPosition = [0, 50, 60];
     var target = [0, 0, 0];
     var up = [0,1, 0];
+    var continuousRotation  =-(degToRad(globals.time)*100)
+    
     var cameraMatrix = m4.lookAt(cameraPosition, target, up);
-    cameraMatrix = m4.multiply(m4.yRotation(cameraAngleRadians),cameraMatrix,);
+    cameraMatrix = m4.multiply(m4.yRotation(cameraAngleRadians + continuousRotation),cameraMatrix,);
     cameraMatrix = m4.translate(cameraMatrix, 0, 0, 1 * 1);
 
     // Make a view matrix from the camera matrix.

@@ -10,7 +10,7 @@ const cubeBufferInfo   = primitives.createCubeWithVertexColorsBufferInfo(gl, 25)
 const coneBufferInfo   = primitives.createTruncatedConeWithVertexColorsBufferInfo(gl, 5, 0, 20, 12, 1, true, false);
 
 //position constants
-var groundHeight = 14.7;
+var groundHeight = 14;
 
 //non animated propertys
 //

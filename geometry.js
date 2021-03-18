@@ -3,11 +3,7 @@ const globals = {
     time:1,
 }
 
-//create Geometry
-const sphereBufferInfo = primitives.createSphereWithVertexColorsBufferInfo(gl, 10, 12, 6);
-const sphereBufferInfoApple = primitives.createSphereWithVertexColorsBufferInfo(gl,2.5, 12, 6);
-const cubeBufferInfo   = primitives.createCubeWithVertexColorsBufferInfo(gl, 25);
-const coneBufferInfo   = primitives.createTruncatedConeWithVertexColorsBufferInfo(gl, 5, 0, 20, 12, 1, true, false);
+
 
 //position constants
 var groundHeight = 14;

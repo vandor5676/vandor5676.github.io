@@ -23,3 +23,12 @@ function hexToRgbVec4(hex) {
     //matrix = m4.xRotate(matrix, xRotation);
     return m4.yRotate(matrix, yRotation);
   }
+
+  //return random number in range
+  function rand(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function eMod(x, n) {
+    return x >= 0 ? (x % n) : ((n - (-x % n)) % n);
+  }

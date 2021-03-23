@@ -9,7 +9,7 @@ if (!gl) {
 
 //shape constants
 //create Geometry
-const sphereBufferInfo = primitives.createSphereWithVertexColorsBufferInfo(gl, 10, 12, 6);
+var sphereBufferInfo = primitives.createSphereWithVertexColorsBufferInfo(gl, 10, 12, 6);
 const sphereBufferInfoApple = primitives.createSphereWithVertexColorsBufferInfo(gl,2.5, 12, 6);
 const cubeBufferInfo   = primitives.createCubeWithVertexColorsBufferInfo(gl, 25);
 const coneBufferInfo   = primitives.createTruncatedConeWithVertexColorsBufferInfo(gl, 5, 0, 20, 12, 1, true, false);
@@ -34,7 +34,7 @@ const objects = [];
 
 // Make infos for each object for each object.
 const baseHue = rand(0, 360);
-const numObjects = 20;
+const numObjects = 4;
 for (let ii = 0; ii < numObjects; ++ii) {
   const id = ii + 1;
   const object = {

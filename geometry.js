@@ -1,7 +1,55 @@
+var sphereUniforms ;
+var cubeUniforms;
+var coneUniforms;
+var appleUniforms;
+
 // globals
 const globals = {
     time:1,
-}
+    objectUniforms: [
+        sphereUniforms = {
+            u_colorMult: [0.5, 1, 0.5, 1],
+            u_matrix: m4.identity(),
+            u_id: [
+                ((1 >> 0) & 0xFF) / 0xFF,
+                0,
+                0,
+                0,
+              ],
+          },
+          cubeUniforms = {
+            u_colorMult: [1, 0.5, 0.5, 1],
+            u_matrix: m4.identity(),
+            u_id: [
+                ((2 >> 0) & 0xFF) / 0xFF,
+                0,
+                0,
+                0,
+              ],
+          },
+          coneUniforms = {
+            u_colorMult: hexToRgbVec4("BE624D"),
+            u_matrix: m4.identity(),
+            u_id: [
+                ((3 >> 0) & 0xFF) / 0xFF,
+                0,
+                0,
+                0,
+              ],
+          },
+          appleUniforms = {
+            u_colorMult: hexToRgbVec4("DC143C"),
+            u_matrix: m4.identity(),
+            u_id: [
+                ((4 >> 0) & 0xFF) / 0xFF,
+                0,
+                0,
+                0,
+              ],
+          },
+    ],
+};
+
 
 
 
@@ -29,19 +77,18 @@ var colorShift = 0.1;
 //gravity
 var gravity = 0.1;
 
-function drawTree()
+function drawTree(overRideProgramInfo)
 {
+  var programInfo = overRideProgramInfo;
     //global rotation
     var globalRotation = 0; //globals.time;
 
 
     // ------ Draw the sphere --------
-    var sphereUniforms = {
-        u_colorMult: [0.5, 1, 0.5, 1],
-        u_matrix: m4.identity(),
-      };
+     
 
-   
+    
+      gl.useProgram(programInfo.program);
     // Setup all the needed attributes.
     webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfo);
 
@@ -56,12 +103,7 @@ function drawTree()
     gl.drawArrays(gl.TRIANGLES, 0, sphereBufferInfo.numElements);
 
     // ------ Draw the cube --------
-    var cubeUniforms = {
-        u_colorMult: [1, 0.5, 0.5, 1],
-        u_matrix: m4.identity(),
-      };
-
-
+     
     // Setup all the needed attributes.
     webglUtils.setBuffersAndAttributes(gl, programInfo, cubeBufferInfo);
 
@@ -76,13 +118,7 @@ function drawTree()
     gl.drawArrays(gl.TRIANGLES, 0, cubeBufferInfo.numElements);
 
     // ------ Draw the cone --------
-    var coneUniforms = {
-        //u_colorMult: [0.5, 0.5, 1, 1],
-        u_colorMult: hexToRgbVec4("BE624D"),
-        u_matrix: m4.identity(),
-      };
-
-
+     
     // Setup all the needed attributes.
     webglUtils.setBuffersAndAttributes(gl, programInfo, coneBufferInfo);
 
@@ -101,11 +137,7 @@ function drawTree()
     //
     for(var i =0;i<4;i++)
     {
-        var appleUniforms = {
-            u_colorMult: hexToRgbVec4("DC143C"),
-            u_matrix: m4.identity(),
-          };
-        
+               
           // Setup all the needed attributes.
         webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfoApple);
     

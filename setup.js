@@ -58,4 +58,7 @@ for (let ii = 0; ii < numObjects; ++ii) {
     bufferInfo: shapes[ii % shapes.length],
     uniforms: object.uniforms,
   });
+
+  
+
 }

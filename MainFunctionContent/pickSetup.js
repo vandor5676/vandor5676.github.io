@@ -101,9 +101,10 @@ function pickAnimation()
        globals.objectUniforms[pickNdx].u_colorMult.map(function(x,i){return i==3?1:x*1.2}) ;//: 
        //globals.objectUniforms[pickNdx].u_colorMult.map(function(x){return x});
     }
-    gl.canvas.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        mouseX = e.clientX - rect.left;
-        mouseY = e.clientY - rect.top;
-     });
+    
 }
+gl.canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+ });

@@ -25,7 +25,7 @@ function main() {
   function drawScene(time) {
     time *= 0.0001;
     globals.time = time;
-    ++frameCount;
+    globals.frameCount = ++frameCount;
 
     if (webglUtils.resizeCanvasToDisplaySize(gl.canvas)) {
       // the canvas was resized, make the framebuffer attachments match

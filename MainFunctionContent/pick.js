@@ -90,6 +90,8 @@ function pickAnimation()
     if (oldPickNdx >= 0) {
       globals.objectUniforms[oldPickNdx].u_colorMult = oldPickColor;
       oldPickNdx = -1;
+
+      globals.objectUniforms.map(function(x){x.isHovered = false;})
     }
 
     // highlight object under mouse
@@ -97,9 +99,9 @@ function pickAnimation()
       const pickNdx = id - 1;
       oldPickNdx = pickNdx;
       oldPickColor = globals.objectUniforms[pickNdx].u_colorMult;
-      globals.objectUniforms[pickNdx].u_colorMult = //(frameCount & 0x8) ?
+      globals.objectUniforms[pickNdx].u_colorMult = 
        globals.objectUniforms[pickNdx].u_colorMult.map(function(x,i){return i==3?1:x*1.2}) ;//: 
-       //globals.objectUniforms[pickNdx].u_colorMult.map(function(x){return x});
+       globals.objectUniforms[pickNdx].isHovered = true;//: 
     }
     
 }

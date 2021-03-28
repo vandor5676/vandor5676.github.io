@@ -1,6 +1,7 @@
 let appleFallFlag = false;
 let treeShakeFlag = false;
 let appleFullGrothFlag = false;
+let appleOnGroundFlag = false;
 
 let frameStopCount;
 let animationDuration = 25;
@@ -21,7 +22,7 @@ gl.canvas.addEventListener('mousedown', (e) => {
     }
     else if (globals.objectUniforms[objects.dirt].isHovered == true) {
         //dirt
-        alert("Dirt");
+        //alert("Dirt");
     }
     else if (globals.objectUniforms[objects.apples].isHovered == true) {
         //dirt
@@ -42,6 +43,7 @@ function animateGravity(itemHeight) {
         return itemHeight;
     }
     if (itemHeight < groundHeight) grassThudAudio.play();
+    appleOnGroundFlag = true;
     return groundHeight;
 }
 //creates tree shake
@@ -57,7 +59,7 @@ function animateTreeShake(treeXLoc, frameCount) {
 // sound when apples are picked up
 function pickUpApple(treeXLoc, frameCount) {
     //when to stop and return
-    if (!appleFallFlag ) return 0;
+    if (!appleFallFlag  || !appleOnGroundFlag) return 0;
     
     //animation and sound
     itemPickupAudio.play();
@@ -68,10 +70,13 @@ function pickUpApple(treeXLoc, frameCount) {
         [-7, -4 + 30, -4],
         [-8, 4 + 30, 3],
     ]
-    //reset gravity,fall flag and apple size
+    //reset gravity,fall flag , apple size and appleOnGroundFlag
     gravity = 0.1;
     appleFallFlag = false;
     appleScale = [0.3,0.3,0.3];
+    appleOnGroundFlag = false;
+    //update money
+    updateMoney(4);
 
 }
 //function for apple groth

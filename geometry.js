@@ -71,6 +71,8 @@ var appleLocationList = [
     [-8, 4 + 30, 3],
 
 ]
+
+var appleScale = [0.3,0.3,0.3];
 //
 
 // colorshift
@@ -140,18 +142,21 @@ function drawTree(overRideProgramInfo) {
     //---draw apples ---
     //
     for (var i = 0; i < 4; i++) {
-
         // Setup all the needed attributes.
         webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfoApple);
 
         //animate gravity and location
         appleTranslation = appleLocationList[i];
         appleTranslation[1] = animateGravity(appleTranslation[1]);
+        
+        //animate apple grow
+        appleScale= appleScale.map(function(x){return slowGroth(1,x,0.0005)})
 
         appleUniforms.u_matrix = computeMatrix(
             viewProjectionMatrix,
             appleTranslation,
-            globalRotation);
+            globalRotation,
+            appleScale);
 
         // Set the uniforms we just computed
         webglUtils.setUniforms(programInfo, appleUniforms);

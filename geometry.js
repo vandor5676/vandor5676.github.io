@@ -49,6 +49,16 @@ const globals = {
                 0,
             ],
         },
+        carrotCubeUniforms = {
+            u_colorMult: [1, 0.5, 0.5, 1],
+            u_matrix: m4.identity(),
+            u_id: [
+                ((5 >> 0) & 0xFF) / 0xFF,
+                0,
+                0,
+                0,
+            ],
+        },
     ],
 };
 
@@ -62,6 +72,7 @@ var groundHeight = 14;
 //
 var sphereTranslation = [0, 30, 0];
 var cubeTranslation = [0, 0, 0];
+var carrotCubeTranslation = [27, 60, 0];
 var coneTranslation = [0, 20, 0];
 var appleTranslation = [7, 22, 0];
 var appleLocationList = [
@@ -120,6 +131,24 @@ function drawTree(overRideProgramInfo) {
 
     // Set the uniforms we just computed
     webglUtils.setUniforms(programInfo, cubeUniforms);
+
+    gl.drawArrays(gl.TRIANGLES, 0, cubeBufferInfo.numElements);
+    
+    // ------ Draw the carrot cube --------
+    // Setup all the needed attributes.
+    webglUtils.setBuffersAndAttributes(gl, programInfo, cubeBufferInfo);
+
+    carrotCubeUniforms.u_matrix = computeMatrix(
+        viewProjectionMatrix,
+        carrotCubeTranslation,
+        globalRotation);
+
+    //animate gravity and location
+    //carrotCubeTranslation = appleLocationList[i];
+    carrotCubeTranslation[1] = newLandAnimation(carrotCubeTranslation[1]);
+
+    // Set the uniforms we just computed
+    webglUtils.setUniforms(programInfo, carrotCubeUniforms);
 
     gl.drawArrays(gl.TRIANGLES, 0, cubeBufferInfo.numElements);
 

@@ -6,6 +6,9 @@ let appleOnGroundFlag = false;
 let frameStopCount;
 let animationDuration = 25;
 
+var carrotPlotFlag = false;
+var carrotPlotDropSoundFlag = false;
+
 //click on object
 gl.canvas.addEventListener('mousedown', (e) => {
     var objects = {
@@ -31,7 +34,7 @@ gl.canvas.addEventListener('mousedown', (e) => {
     }
 });
 
-//creates fake gravity
+//creates fake gravity for apples
 function animateGravity(itemHeight) {
     //when to stop
     if (!appleFallFlag || !appleFullGrothFlag) return itemHeight;
@@ -94,5 +97,28 @@ function slowGroth(stop, value, groth)
         return stop;
     }  
 
+}
+//function for new plot of land animation
+function newLandAnimation(location)
+{
+    //if land is purchased
+    if(carrotPlotFlag)
+    {
+        //if land is in the sky
+        if(location>0)
+        {
+            //if land is almost hit the bottom play audio
+            if(location ==1)
+            bigThudAudio.play();
+            //lowwer land from sky
+            return location-1;
+        }        
+        else 
+        {       
+            //keep land in place once it hits the bottom     
+            return 0;
+        }
+    }
+    return location;
 }
 

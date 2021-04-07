@@ -59,6 +59,16 @@ const globals = {
                 0,
             ],
         },
+        carrotUniforms = {
+            u_colorMult: hexToRgbVec4("F76F1E"),
+            u_matrix: m4.identity(),
+            u_id: [
+                ((6 >> 0) & 0xFF) / 0xFF,
+                0,
+                0,
+                0,
+            ],
+        },
     ],
 };
 
@@ -80,6 +90,13 @@ var appleLocationList = [
     [4.12, -1 + 30, -8.66],
     [-7, -4 + 30, -4],
     [-8, 4 + 30, 3],
+
+]
+var carrotLocationList = [
+    [7+27, 14, 0],
+    [4.12+27,14, -8.66],
+    [-7+27, 14, -4],
+    [-8+27, 14, 3],
 
 ]
 
@@ -189,6 +206,33 @@ function drawTree(overRideProgramInfo) {
 
         // Set the uniforms we just computed
         webglUtils.setUniforms(programInfo, appleUniforms);
+
+        gl.drawArrays(gl.TRIANGLES, 0, sphereBufferInfoApple.numElements);
+
+    }
+    //---draw carrots ---
+    //
+    for (var i = 0; i < 4; i++) {
+        // Setup all the needed attributes.
+        webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfoApple);
+
+        //animate gravity and change location
+         var carrotTranslation = carrotLocationList[i];
+        // appleTranslation[1] = animateGravity(appleTranslation[1]);
+        
+        //animate apple grow
+        // appleScale= appleScale.map(function(x){return slowGroth(1,x,0.0005)})
+
+        carrotUniforms.u_matrix = computeMatrix(
+            viewProjectionMatrix,
+            carrotTranslation,
+            globalRotation,);
+            //appleScale);
+
+    
+
+        // Set the uniforms we just computed
+        webglUtils.setUniforms(programInfo, carrotUniforms);
 
         gl.drawArrays(gl.TRIANGLES, 0, sphereBufferInfoApple.numElements);
 

@@ -13,6 +13,7 @@ var sphereBufferInfo = primitives.createSphereWithVertexColorsBufferInfo(gl, 10,
 const sphereBufferInfoApple = primitives.createSphereWithVertexColorsBufferInfo(gl,2.5, 12, 6);
 const cubeBufferInfo   = primitives.createCubeWithVertexColorsBufferInfo(gl, 25);
 const coneBufferInfo   = primitives.createTruncatedConeWithVertexColorsBufferInfo(gl, 5, 0, 20, 12, 1, true, false);
+const carrotBufferInfo   = createFlattenedFunc(createCrrotVertices(2.5, 12, 6));
 
 const shapes = [
     sphereBufferInfo,

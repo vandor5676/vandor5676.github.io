@@ -214,7 +214,7 @@ function drawTree(overRideProgramInfo) {
     //
     for (var i = 0; i < 4; i++) {
         // Setup all the needed attributes.
-        webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfoApple);
+        webglUtils.setBuffersAndAttributes(gl, programInfo, carrotBufferInfo);
 
         //animate gravity and change location
          var carrotTranslation = carrotLocationList[i];

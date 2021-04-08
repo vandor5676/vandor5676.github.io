@@ -92,15 +92,17 @@ var appleLocationList = [
     [-8, 4 + 30, 3],
 
 ]
+var carrotHeightValue = 30;
 var carrotLocationList = [
-    [7+27, 14, 0],
-    [4.12+27,14, -8.66],
-    [-7+27, 14, -4],
-    [-8+27, 14, 3],
+    [7+27, 14 + carrotHeightValue, 0],
+    [4.12+27,14+carrotHeightValue, -8.66],
+    [-7+27, 14+carrotHeightValue, -4],
+    [-8+27, 14+carrotHeightValue, 3],
 
 ]
 
 var appleScale = [0.3,0.3,0.3];
+var carrotScale = [0.3,0.3,0.3];
 //
 
 // colorshift
@@ -220,17 +222,17 @@ function drawTree(overRideProgramInfo) {
          var carrotTranslation = carrotLocationList[i];
         // appleTranslation[1] = animateGravity(appleTranslation[1]);
         
-        //animate apple grow
-        // appleScale= appleScale.map(function(x){return slowGroth(1,x,0.0005)})
+        //animate carrot grow
+         carrotScale= carrotScale.map(function(x){return slowGroth(1,x,0.0005)})
 
         carrotUniforms.u_matrix = computeMatrix(
             viewProjectionMatrix,
             carrotTranslation,
-            globalRotation,);
-            //appleScale);
+            globalRotation,
+            carrotScale);
 
     
-
+            carrotTranslation[1] = newLandAnimation(carrotTranslation[1],14);
         // Set the uniforms we just computed
         webglUtils.setUniforms(programInfo, carrotUniforms);
 

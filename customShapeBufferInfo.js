@@ -41,14 +41,19 @@ function createCrrotVertices(
             const cosTheta = Math.cos(theta);
             const sinPhi = Math.sin(phi);
             const cosPhi = Math.cos(phi);
-            const ux = cosTheta * sinPhi;
+            const ux = cosTheta * sinPhi /3;
             const uy = cosPhi;
-            const uz = sinTheta * sinPhi;
-            positions.push(radius * ux, radius * uy, radius * uz);
+            const uz = sinTheta * sinPhi /3;
+            positions.push(radius * ux, (radius) * uy, radius * uz);
+            positions.push(0,-5,0);
+           // radius = radius-0.01;
             normals.push(ux, uy, uz);
             texCoords.push(1 - u, v);
+
+            
         }
     }
+
 
     const numVertsAround = subdivisionsAxis + 1;
     const indices = webglUtils.createAugmentedTypedArray(3, subdivisionsAxis * subdivisionsHeight * 2, Uint16Array);

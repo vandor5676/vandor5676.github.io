@@ -99,13 +99,13 @@ function slowGroth(stop, value, groth)
 
 }
 //function for new plot of land animation
-function newLandAnimation(location)
+function newLandAnimation(location,stop =0)
 {
     //if land is purchased
     if(carrotPlotFlag)
     {
         //if land is in the sky
-        if(location>0)
+        if(location>stop)
         {
             //if land is almost hit the bottom play audio
             if(location ==1)
@@ -116,7 +116,7 @@ function newLandAnimation(location)
         else 
         {       
             //keep land in place once it hits the bottom     
-            return 0;
+            return stop;
         }
     }
     return location;

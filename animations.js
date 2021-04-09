@@ -8,13 +8,17 @@ let animationDuration = 25;
 
 var carrotPlotFlag = false;
 var carrotPlotDropSoundFlag = false;
+var carrotPickupAnimation = false;
+let carrotFullGrothFlag = false;
 
 //click on object
 gl.canvas.addEventListener('mousedown', (e) => {
+    //objects, u_id -1
     var objects = {
         leaves: 0,
         dirt: 1,
         apples: 3,
+        carrots: 5,
     }
     if (globals.objectUniforms[objects.leaves].isHovered == true) {
         //tree leaves
@@ -28,9 +32,14 @@ gl.canvas.addEventListener('mousedown', (e) => {
         //alert("Dirt");
     }
     else if (globals.objectUniforms[objects.apples].isHovered == true) {
-        //dirt
+        //apples
         pickUpApple();
         //alert("Apples");
+    }
+    else if (globals.objectUniforms[objects.carrots].isHovered == true) {
+        //carrots
+        pickUpCarrots()
+        //alert("CArrots");
     }
 });
 
@@ -83,17 +92,21 @@ function pickUpApple(treeXLoc, frameCount) {
 
 }
 //function for apple groth
-function slowGroth(stop, value, groth)
+function slowGroth(stop, value, groth,tag)
 {
     if(value<stop)
     {
+        if(tag == "apple")
         appleFullGrothFlag = false;
         return value +groth;
     } 
 
     else
     {
+        if(tag == "apple")
         appleFullGrothFlag = true;
+        if(tag == "carrot")
+        carrotFullGrothFlag = true;
         return stop;
     }  
 
@@ -120,5 +133,44 @@ function newLandAnimation(location,stop =0)
         }
     }
     return location;
+}
+
+function pickUpCarrots()
+{
+    if(carrotFullGrothFlag)
+    carrotPickupAnimation = true;
+
+}
+function pickUpCarrotsAnimation()
+{
+    let upSpeed = 0.05;
+    let carrotStopHieght = 25;
+    for(let i=0;i<carrotLocationList.length;i++)
+    {
+        if(carrotLocationList[i][1]<=carrotStopHieght)
+        carrotLocationList[i][1]=carrotLocationList[i][1]+upSpeed;
+        else 
+        {
+            itemPickupAudio.play();
+            carrotPickupAnimation = false;
+             carrotLocationList = [
+                [7+27, 14 , 0],
+                [4.12+27,14, -8.66],
+                [-7+27, 14, -4],
+                [-0+27, 14, 6],
+                [8+27, 14, 5],
+                [4+27, 14, 2],
+                [-4+27, 14, 2],
+            
+            ]
+            carrotStopHeight = 14;
+             carrotScale = [0.1,0.1,0.1];
+             carrotFullGrothFlag =false;
+             updateMoney(7);
+            return carrotStopHieght;   
+        }
+    }
+    carrotStopHeight = carrotStopHeight + upSpeed;
+
 }
 

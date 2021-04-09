@@ -92,12 +92,16 @@ var appleLocationList = [
     [-8, 4 + 30, 3],
 
 ]
-var carrotHeightValue = 30;
+var carrotHeightOffset = 35;
+var carrotStopHeight = 14;
 var carrotLocationList = [
-    [7+27, 14 + carrotHeightValue, 0],
-    [4.12+27,14+carrotHeightValue, -8.66],
-    [-7+27, 14+carrotHeightValue, -4],
-    [-8+27, 14+carrotHeightValue, 3],
+    [7+27, 14 + carrotHeightOffset, 0],
+    [4.12+27,14+carrotHeightOffset, -8.66],
+    [-7+27, 14+carrotHeightOffset, -4],
+    [-0+27, 14+carrotHeightOffset, 6],
+    [8+27, 14+carrotHeightOffset, 5],
+    [4+27, 14+carrotHeightOffset, 2],
+    [-4+27, 14+carrotHeightOffset, 2],
 
 ]
 
@@ -198,7 +202,7 @@ function drawTree(overRideProgramInfo) {
         appleTranslation[1] = animateGravity(appleTranslation[1]);
         
         //animate apple grow
-        appleScale= appleScale.map(function(x){return slowGroth(1,x,0.0005)})
+        appleScale= appleScale.map(function(x){return slowGroth(1,x,0.0005,"apple")})
 
         appleUniforms.u_matrix = computeMatrix(
             viewProjectionMatrix,
@@ -214,16 +218,16 @@ function drawTree(overRideProgramInfo) {
     }
     //---draw carrots ---
     //
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < carrotLocationList.length; i++) {
         // Setup all the needed attributes.
         webglUtils.setBuffersAndAttributes(gl, programInfo, carrotBufferInfo);
 
         //animate gravity and change location
+        if(carrotPickupAnimation)pickUpCarrotsAnimation();
          var carrotTranslation = carrotLocationList[i];
-        // appleTranslation[1] = animateGravity(appleTranslation[1]);
         
         //animate carrot grow
-         carrotScale= carrotScale.map(function(x){return slowGroth(1,x,0.0005)})
+         carrotScale= carrotScale.map(function(x){return slowGroth(1.2,x,0.0005,"carrot")})
 
         carrotUniforms.u_matrix = computeMatrix(
             viewProjectionMatrix,
@@ -232,7 +236,7 @@ function drawTree(overRideProgramInfo) {
             carrotScale);
 
     
-            carrotTranslation[1] = newLandAnimation(carrotTranslation[1],14);
+            carrotTranslation[1] = newLandAnimation(carrotTranslation[1],carrotStopHeight);
         // Set the uniforms we just computed
         webglUtils.setUniforms(programInfo, carrotUniforms);
 

@@ -556,11 +556,46 @@
       [0, 1],
       [1, 1],
     ];
+    var faceTexcoords = 
+      [
+      // select the top left image
+      [0   , 0.5],
+      [0   , 0  ],
+      [0.25, 0  ],
+      [0.25, 0.5],
+      // // select the top middle imag]e
+       [0.5 , 0  ],
+       [0.5, 0.5  ],
+       [0.25, 0.5],
+       [0.25 , 0  ],
+      // // select to top right imag]e
+      [0.75, 0  ],
+      [0.75, 0.5],
+      [0.5 , 0.5],
+       [0.5 , 0  ],
+      // // select the bottom left imag]e
+      [0.25   , 0.5],
+      [0.5, 0.5],
+       [0.5, 1.0],
+       [0.25   , 1.0  ],
+      // // select the bottom middle imag]e
+       [0.25, 0.5],
+       [0.5 , 0.5],
+       [0.5 , 1  ],
+       [0.25, 1  ],
+      // // select the bottom right imag]e
+      [0.75, 0.5],
+      [0.75, 1  ],
+      [0.5 , 1  ],
+       [0.5 , 0.5],
+
+
+    ];
 
     const numVertices = 6 * 4;
     const positions = webglUtils.createAugmentedTypedArray(3, numVertices);
     const normals   = webglUtils.createAugmentedTypedArray(3, numVertices);
-    const texCoords = webglUtils.createAugmentedTypedArray(2 , numVertices);
+    const texCoords = webglUtils.createAugmentedTypedArray(2 , 6*6);
     const indices   = webglUtils.createAugmentedTypedArray(3, 6 * 2, Uint16Array);
 
     for (let f = 0; f < 6; ++f) {
@@ -574,7 +609,7 @@
         // coordinates are not all the same.
         positions.push(position);
         normals.push(normal);
-        texCoords.push(uv);
+        //texCoords.push(uv);
 
       }
       // Two triangles make a square face.
@@ -582,6 +617,11 @@
       indices.push(offset + 0, offset + 1, offset + 2);
       indices.push(offset + 0, offset + 2, offset + 3);
     }
+    for(let i=0;i<faceTexcoords.length;i++)
+    {
+      texCoords.push(faceTexcoords[i]);
+    }
+    
 
     return {
       position: positions,

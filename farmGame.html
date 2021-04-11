@@ -19,10 +19,12 @@
 attribute vec4 a_position;
 attribute vec3 a_normal;
 attribute vec4 a_color;
+attribute vec2 a_texcoord;
 
 uniform mat4 u_matrix;
 
 varying vec4 v_color;
+varying vec2 v_texcoord;
 
 void main() {
   vec3 pos = -(u_matrix * a_position).xyz;
@@ -61,6 +63,9 @@ void main() {
   // Pass the color to the fragment shader.
   v_color = a_color+(ambient * 0.1 + diffuse *0.2 +specular *0.2);
   v_color.a = 1.0;
+
+  // Pass the texcoord to the fragment shader.
+  v_texcoord = a_texcoord;
 }
 </script>
 <!-- fragment shader -->
@@ -69,11 +74,15 @@ precision mediump float;
 
 // Passed in from the vertex shader.
 varying vec4 v_color;
+varying vec2 v_texcoord;
+
+// The texture.
+uniform sampler2D u_texture;
 
 uniform vec4 u_colorMult;
 
 void main() {
-   gl_FragColor = v_color * u_colorMult;
+   gl_FragColor = v_color * u_colorMult * texture2D(u_texture, v_texcoord);
 }
 </script>
 <!--  -->

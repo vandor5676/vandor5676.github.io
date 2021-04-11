@@ -86,7 +86,7 @@ var carrotCubeTranslation = [27, 60, 0];
 var coneTranslation = [0, 20, 0];
 var appleTranslation = [7, 22, 0];
 var appleLocationList = [
-    [7, 22, 0],
+    [7, 22, 0],//[1, 14, 15],//
     [4.12, -1 + 30, -8.66],
     [-7, -4 + 30, -4],
     [-8, 4 + 30, 3],

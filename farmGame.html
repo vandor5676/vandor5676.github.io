@@ -15,19 +15,53 @@
 </body>
 <!-- vertex shader -->
 <script  id="vertex-shader-3d" type="x-shader/x-vertex">
+  
 attribute vec4 a_position;
+attribute vec3 a_normal;
 attribute vec4 a_color;
 
 uniform mat4 u_matrix;
+uniform mat4 uModelViewMatrix;
 
 varying vec4 v_color;
 
 void main() {
+  vec3 pos = -(u_matrix * a_position).xyz;
+
+  //fixed light postion
+
+  vec3 light = vec3(100,-40,-35).xyz;
+  vec3 L = normalize(light - pos);
+
+
+  vec3 E = normalize(-pos);
+  vec3 H = normalize(L + E);
+
+  vec4 NN = vec4(a_normal,0);
+
+  // Transform vertex normal into eye coordinates
+
+  vec3 N = normalize((u_matrix*NN).xyz);
+
+  // Compute terms in the illumination equation
+  vec4 ambient = vec4(0.2,0,0.2,1);
+
+  float Kd = max(dot(L, N), 0.0);
+  vec4  diffuse = Kd*a_color;
+
+  float Ks = pow( max(dot(N, H), 0.0), 0.1 );
+  vec4  specular = Ks * a_color;
+
+  if( dot(L, N) < 0.0 ) {
+  specular = vec4(0.0, 0.0, 0.0, 1.0);
+  }
+
   // Multiply the position by the matrix.
   gl_Position = u_matrix * a_position;
 
   // Pass the color to the fragment shader.
-  v_color = a_color;
+  v_color = a_color+(ambient * 0.1 + diffuse *0.2 +specular *0.2);
+  v_color.a = 1.0;
 }
 </script>
 <!-- fragment shader -->

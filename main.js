@@ -49,7 +49,10 @@ function main() {
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-    //drawObjects(objectsToDraw);
+    gl.uniformMatrix4fv(gl.getUniformLocation(programInfo.program,
+      "uModelViewMatrix"), false, flatten(mat4()));
+
+    //draws objects 
     drawTree(programInfo);
 
 

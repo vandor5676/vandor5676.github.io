@@ -92,7 +92,7 @@ var appleLocationList = [
     [-8, 4 + 30, 3],
 
 ]
-var carrotHeightOffset = 35;
+var carrotHeightOffset = 85;
 var carrotStopHeight = 14;
 var carrotLocationList = [
     [7+27, 14 + carrotHeightOffset, 0],

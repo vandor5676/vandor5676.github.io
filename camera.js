@@ -22,7 +22,7 @@ function radToDeg(r) {
     var cameraPosition = [0, 50, 60];
     var target = [0, 0, 0];
     var up = [0,1, 0];
-    var continuousRotation  =0;//-(degToRad(globals.time)*100)
+    var continuousRotation  =-(degToRad(globals.time)*100)
     
     var cameraMatrix = m4.lookAt(cameraPosition, target, up);
     cameraMatrix = m4.multiply(m4.yRotation(cameraAngleRadians + continuousRotation),cameraMatrix,);

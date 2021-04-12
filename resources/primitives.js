@@ -475,7 +475,7 @@
         const uz = sinTheta * sinPhi;
         positions.push(radius * ux, radius * uy, radius * uz);
         normals.push(ux, uy, uz);
-        texCoords.push(1 - u, v);
+        //texCoords.push(1 - u, v);
       }
     }
 
@@ -719,7 +719,7 @@
             (yy < 0 || yy > verticalSubdivisions) ? 0 : (sin * cosSlant),
             (yy < 0) ? -1 : (yy > verticalSubdivisions ? 1 : sinSlant),
             (yy < 0 || yy > verticalSubdivisions) ? 0 : (cos * cosSlant));
-        texCoords.push((ii / radialSubdivisions), 1 - v);
+        //texCoords.push((ii / radialSubdivisions), 1 - v);
       }
     }
 

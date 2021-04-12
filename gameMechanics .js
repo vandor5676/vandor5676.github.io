@@ -10,5 +10,12 @@ function updateMoney(value)
 //buy carrots
 $("#buyCarrotsButton").click(function()
 {
-    carrotPlotFlag = true;
+    //if carrots are not already there
+    if(carrotPlotFlag!=true)
+    {
+           carrotPlotFlag = true;
+    money = money -8;
+    $("#money").html(money.toString()); 
+    }
+
 })

@@ -1,21 +1,25 @@
 <title>Farm Game</title>
-<body>
-  
 
-<canvas id="canvas" style="height: 90vh; width: 95vw;"></canvas>
-<div id="uiContainer">
-  <div id="ui">
+<body>
+
+
+  <canvas id="canvas" style="height: 90vh; width: 95vw;"></canvas>
+  <div id="uiContainer">
+    <div id="ui">
       <div id="cameraAngle"></div>
+    </div>
+    <div id="uiWrapper">
+      <p id="money">0</p>
+    </div>
+    <div>
+      <i class="fas fa-dollar-sign"></i>
+      <button id="buyCarrotsButton">Buy Carrots</button>
+    </div>
   </div>
-  <div id="uiWrapper">
-    <p id="money">Counter</p>
-    <button id="buyCarrotsButton">Buy Carrots</button>
-  </div>
-</div>
 </body>
 <!-- vertex shader -->
-<script  id="vertex-shader-3d" type="x-shader/x-vertex">
-  
+<script id="vertex-shader-3d" type="x-shader/x-vertex">
+
 attribute vec4 a_position;
 attribute vec3 a_normal;
 attribute vec4 a_color;
@@ -69,7 +73,7 @@ void main() {
 }
 </script>
 <!-- fragment shader -->
-<script  id="fragment-shader-3d" type="x-shader/x-fragment">
+<script id="fragment-shader-3d" type="x-shader/x-fragment">
 precision mediump float;
 
 // Passed in from the vertex shader.
@@ -139,3 +143,4 @@ for webgl-utils, m3, m4, and webgl-lessons-ui.
 <script src="../main.js"></script>
 
 <link rel="stylesheet" href="../resources/styles.css">
+<script src="https://kit.fontawesome.com/f85ff1d3ed.js" crossorigin="anonymous"></script>
